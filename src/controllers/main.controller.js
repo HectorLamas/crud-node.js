@@ -4,11 +4,17 @@
  * Los controladores de usan para ir modularizando e ir 
  * haciendo la lógica más simple poniendola en módulos. 
  */
+const path = require("path"); 
 
 const index = (req, res)=>{
-    res.send("Hola Mundo!!! *(con Router)"); 
+    // Para enviar texto estático: 
+    // res.send("Hola Mundo!!! *(con Router)"); 
+    
+    // Para enviar archivo html 
+    res.sendFile(path.resolve(__dirname, "../../private/index.html") ); 
+
 }
 
 module.exports = {
-    index: index,
+    index,
 }
