@@ -12,7 +12,18 @@ npm run dev
 ```
 
 ## Para guardar en GitHub 
+Crear un nuevo repositorio sobre la línea de comandos 
+git init 
+git add <filename>
+git commit -m "First commit" 
+git branch -M main 
+git remote add origin https://github.com/HectorLamas/crud-node.js.git
+git push -u origin main 
 
+O empujar un repositorio existente desde la línea de comandos 
+git remote add origin https://github.com/HectorLamas/crud-node.js.git
+git branch -M main 
+git push -u origin main 
 
 ## Cómo clonar el repositorio 
 1. Abrir la terminal de git bash 

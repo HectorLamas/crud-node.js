@@ -1,21 +1,10 @@
 const express = require('express'); 
 const router = express.Router(); 
 
-// Este módulo está incluido en node 
-const queryString = require('querystring'); 
+const controller = require('../controllers/productos.controller'); 
 
-router.get('/', (req, res) => {
-    const query = queryString.stringify(req.query); 
+router.get('/', controller.index);
 
-    fetch('https://fakestoreapi.com/products/?' + query)
-        .then(response => response.json())
-        .then(prods => res.send(prods));
-})
-
-router.get('/:id', (req, res) => {
-    fetch('https://fakestoreapi.com/products/' + req.params.id)
-        .then(response => response.json())
-        .then(prod => res.send(prod));
-})
+router.get('/:id', controller.show1product);
 
 module.exports = router; 
