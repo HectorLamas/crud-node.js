@@ -5,9 +5,10 @@ const app = express();
 
 const PORT = process.env.PORT|| 3003; 
 
-app.get('/', (req, res)=>{
-    res.send("Hola Mundo!***")
-})
+const mainRouter = require('./src/routes/main.router'); 
+app.use(mainRouter)
+
+app.use('/productos', require('./src/routes/productos.router')); // Equivalente a las dos líneas anteriores 
 
 app.listen(PORT, ()=>{
     console.log(`Listening on http://localhost:${PORT}`)
