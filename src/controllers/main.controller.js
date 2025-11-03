@@ -11,10 +11,15 @@ const index = (req, res)=>{
     // res.send("Hola Mundo!!! *(con Router)"); 
     
     // Para enviar archivo html 
-    res.sendFile(path.resolve(__dirname, "../../private/index.html") ); 
+    // res.sendFile(path.resolve(__dirname, "../../private/index.html") ); 
+    res.render("index") // renderizar vista 'index'
+}
 
+const private = (req, res)=>{
+    res.sendFile(path.resolve(__dirname, "../../private/index.html") ); 
 }
 
 module.exports = {
     index,
+    private,
 }

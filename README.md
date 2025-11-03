@@ -39,6 +39,11 @@ Cómo crear rutas con Node.js y Express
 https://www.youtube.com/watch?v=hOORng7xOpQ&list=PLxXpfdBOyZ_WZpH04MHQ8qepsA4Gs8cEk&index=2
 JaPaFe Net 
 
+Video 5. 
+Como crear Layouts con Node.js y Express
+https://www.youtube.com/watch?v=c3wizBPT5jM&list=PLxXpfdBOyZ_WZpH04MHQ8qepsA4Gs8cEk&index=5
+JaPaFe Net 
+
 ## Otras api de prueba 
 * fetch('https://fakestoreapi.com/products')
 * fetch('https://api.escuelajs.co/api/v1/products')

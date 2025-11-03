@@ -4,6 +4,7 @@ const router =  express.Router();
 const controller = require('../controllers/main.controller'); 
 
 router.get('/', controller.index)
+router.get('/privada', controller.private)
 
 // Sólo lo que yo exponga del módulo es público. 
 // El resto es privado del módulo. 

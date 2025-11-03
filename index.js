@@ -2,7 +2,8 @@ require('dotenv').config();
 
 const express = require('express'); 
 const app = express(); 
-const path = require("path"); 
+const path = require('path'); 
+const layouts = require('express-ejs-layouts'); 
 
 const PORT = process.env.PORT|| 3003; 
 
@@ -12,11 +13,15 @@ app.use(express.static( path.join(__dirname, "public") )); // Aquí le pasamos l
 app.set('view engine', 'ejs');  // usar ejs como motor para hacer un render 
 app.set('views', path.join(__dirname, 'src/views')); //busca en esta carpeta las vistas que va a renderizar
 
+app.use(layouts); 
+// Va a buscar un archivo llamado 'layout' que es el que va a envolver nuestra vista 
+app.set('layout', 'layouts/layout')
+
 
 const mainRouter = require('./src/routes/main.router'); 
 app.use(mainRouter)
-
-app.use('/productos', require('./src/routes/productos.router')); // Equivalente a las dos líneas anteriores 
+// Equivalente a las dos líneas anteriores
+app.use('/productos', require('./src/routes/productos.router'));  
 
 app.listen(PORT, ()=>{
     console.log(`Listening on http://localhost:${PORT}`)
