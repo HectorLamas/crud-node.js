@@ -15,13 +15,14 @@ app.set('views', path.join(__dirname, 'src/views')); //busca en esta carpeta las
 
 app.use(layouts); 
 // Va a buscar un archivo llamado 'layout' que es el que va a envolver nuestra vista 
-app.set('layout', 'layouts/layout')
+app.set('layout', 'layouts/layout'); 
+app.use(express.urlencoded({extended: false})); // Middleware: toma la información de contacto y la proporciona utilizable
 
 
 const mainRouter = require('./src/routes/main.router'); 
 app.use(mainRouter)
-// Equivalente a las dos líneas anteriores
-app.use('/productos', require('./src/routes/productos.router'));  
+app.use('/productos', require('./src/routes/productos.router')); // Equivalente a las dos líneas anteriores
+app.use('/contacto', require('./src/routes/contacto.router'));  
 
 app.listen(PORT, ()=>{
     console.log(`Listening on http://localhost:${PORT}`)
