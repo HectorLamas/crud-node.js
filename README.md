@@ -48,6 +48,15 @@ Video 6.
 Cómo utilizar formularios con Node.js y Express
 https://www.youtube.com/watch?v=c3wizBPT5jM&list=PLxXpfdBOyZ_WZpH04MHQ8qepsA4Gs8cEk&index=6
 
+Video 7. 
+Cómo Crear un CRUD MVC en Node.js y Express
+https://www.youtube.com/watch?v=c3wizBPT5jM&list=PLxXpfdBOyZ_WZpH04MHQ8qepsA4Gs8cEk&index=7
+
+* En este video se completan las acciones de crear, mostrar, editar, actualizar, borrar... de las categorías que se almacenan en un array. 
+* Además se hace uso de los módulos 'fs' y 'path' para acceder al sistema de archivos: read-write. 
+* Finalmente se utilizan estilos para dar algo de estética a la aplicación. 
+
+
 ## Otras api de prueba 
 * fetch('https://fakestoreapi.com/products')
 * fetch('https://api.escuelajs.co/api/v1/products')

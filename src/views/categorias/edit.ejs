@@ -1,0 +1,9 @@
+<h1>Editar Categoría</h1> 
+
+<form action="/categorias/<%= categ.id %>?_method=PUT" method="post">
+    <div>
+        <label for="inputNombreCategoria">Nombre categoría: </label>
+        <input type="text" name="inputNombreCategoria" id="idInputNombreCategoria" value="<%= categ.nombre%>">
+    </div>
+    <button class="button button--primary" type="submit">Guardar</button>
+</form>

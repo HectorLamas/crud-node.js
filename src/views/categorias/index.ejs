@@ -1,0 +1,42 @@
+<h1>Listado de Categorías</h1>
+
+<a class="button button--primary" href="/categorias/create">Crear una categoría</a>
+
+<section class="clase__categorias">
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% categorias.forEach(categ => { %> 
+            <tr>
+                <td><a href="/categorias/<%= categ.id %>"><%= categ.nombre %></a></td>
+                <td class="cell-inline">
+                    <a class="button button--primary" href="/categorias/<%= categ.id %>/edit">Edit</a>
+                    <form class="form-delete" action="/categorias/<%= categ.id %>?_method=DELETE" method="post">
+                        <button class="button button--danger" type="submit">Borrar</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+</section>
+
+<script> 
+    /** Este script se pone a escuchar cualquier evento SUBMIT
+    * Evita que se envie por default
+    * Y si la lista de clases a la que pertenece contiene 'form-delte'
+    * entonces pide confirmación del borrado. */
+    document.addEventListener("submit", (event) => {
+        event.preventDefault(); 
+
+        if (event.target.classList.contains("form-delete")) {
+            if (confirm("¿Está seguro?")) {
+                event.target.submit(); 
+            }
+        }
+    })
+</script>

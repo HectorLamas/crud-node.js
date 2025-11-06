@@ -5,6 +5,9 @@ const app = express();
 const path = require('path'); 
 const layouts = require('express-ejs-layouts'); 
 
+const methodOverride = require('method-override'); 
+app.use(methodOverride("_method")); 
+
 const PORT = process.env.PORT|| 3003; 
 
 // Siempre que podamos usamos rutas absolutas 
@@ -22,6 +25,7 @@ app.use(express.urlencoded({extended: false})); // Middleware: toma la informaci
 const mainRouter = require('./src/routes/main.router'); 
 app.use(mainRouter)
 app.use('/productos', require('./src/routes/productos.router')); // Equivalente a las dos líneas anteriores
+app.use('/categorias', require('./src/routes/categorias.router')); 
 app.use('/contacto', require('./src/routes/contacto.router'));  
 
 app.listen(PORT, ()=>{
