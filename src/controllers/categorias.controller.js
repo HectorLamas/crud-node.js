@@ -13,8 +13,10 @@ const create = (req, res) => {
     res.render("categorias/create"); // Se renderiza esta vista 
 }
 
-// Para recibir la información del formulario 'Crear categoría'
+// Recibe store la información que nos envían desde el formulario 'Crear categoría'
 const store = (req, res) => {
+    // Lo que se envía a través del formulario viene en req.body. 
+    // Al enviar formulario, usando el middleware urlencoded se pasa la información al req.body
     const {inputNombreCategoria} = req.body; 
     //console.log(req.body); 
     const cat = {
@@ -33,7 +35,7 @@ const store = (req, res) => {
 }
 
 
-// Esta función es para mostrar el listado de las categorías. 
+// Esta función es para mostrar el LISTADO de las categorías. 
 const index = (req, res) => {
     try {
         // Tratar de ejecutar este código. Si no se puede, 
@@ -50,7 +52,7 @@ const index = (req, res) => {
 }
 
 
-// Esta es para mostrar el detalle de las categorías 
+// Esta es para mostrar el DETALLE de las categorías 
 const show = (req, res) => {
     /**AQUÍ NO ES EL PROBLEMA */
     arrCategorias = JSON.parse(
@@ -81,7 +83,7 @@ const edit = (req, res) => {
     res.render('categorias/edit', {categ}); 
 }
 
-
+// Se ejecuta al modificar las categorías  
 const update = (req, res) => {
     arrCategorias = JSON.parse(
         fs.readFileSync(path.resolve(__dirname, "../../file_categorias.json"), "utf-8")
@@ -97,6 +99,9 @@ const update = (req, res) => {
 
     categ.nombre = inputNombreCategoria; 
 
+    // No se le puede pasar directamente el array arrCategorias porque no lo va a entender. 
+    // Por lo tanto se guarda el arrCategorias en formato JSON. 
+    // Los archivos JSON son más estrictos: las claves aparecen con comillas dobles y el texto también
     fs.writeFileSync(
         path.resolve(__dirname, "../../file_categorias.json"), 
         JSON.stringify(arrCategorias)
@@ -108,6 +113,7 @@ const update = (req, res) => {
 
 
 const destroy = (req, res) => {
+    // JSON.parse() se utiliza para convertir una cadena de texto en formato JSON en un objeto JS.
     arrCategorias = JSON.parse(
         fs.readFileSync(path.resolve(__dirname, "../../file_categorias.json"), "utf-8")
     );

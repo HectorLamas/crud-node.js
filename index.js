@@ -6,7 +6,7 @@ const path = require('path');
 const layouts = require('express-ejs-layouts'); 
 
 const methodOverride = require('method-override'); 
-app.use(methodOverride("_method")); 
+app.use(methodOverride("_method")); // Se usará la palabra '_method' para definir el método que se simulará
 
 const PORT = process.env.PORT|| 3003; 
 

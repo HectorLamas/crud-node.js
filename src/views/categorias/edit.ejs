@@ -1,5 +1,8 @@
 <h1>Editar Categoría</h1> 
 
+Los métodos en el formulario son 'get' y 'post'. Entonces se tiene que 'simular' 
+el método PUT
+Para esto, se instala el módulo 'method-override' 
 <form action="/categorias/<%= categ.id %>?_method=PUT" method="post">
     <div>
         <label for="inputNombreCategoria">Nombre categoría: </label>
