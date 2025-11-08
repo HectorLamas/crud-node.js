@@ -1,13 +1,4 @@
-const fs = require('fs'); // Para trabajar con el sistema de archivos, viene con node
-const path = require('path'); // Módulo que nos ayuda a manejar las rutas 
-
-let arrCategorias = [
-    /* Este información va a estar en la base de datos 
-    * {id: 1, nombre: "Categoría 1"},
-    {id: 2, nombre: "Categoría 2"},
-    {id: 3, nombre: "Categoría 3"}, */
-]; 
-
+const model = require('../models/Category'); 
 
 const create = (req, res) => {
     res.render("categorias/create"); // Se renderiza esta vista 
@@ -17,123 +8,95 @@ const create = (req, res) => {
 const store = (req, res) => {
     // Lo que se envía a través del formulario viene en req.body. 
     // Al enviar formulario, usando el middleware urlencoded se pasa la información al req.body
+    // console.log(req.body); 
     const {inputNombreCategoria} = req.body; 
-    //console.log(req.body); 
-    const cat = {
-        id: Date.now(),
-        nombre: inputNombreCategoria,
-    }; 
+    const name = inputNombreCategoria; 
 
-    arrCategorias.push(cat); 
-
-    fs.writeFileSync(
-        path.resolve(__dirname, "../../file_categorias.json"), 
-        JSON.stringify(arrCategorias)
-    )
-    res.redirect("/categorias");
-    
+    model.create(name, (error, id) => {
+        if (error){
+            // console.error(error); 
+            return res.status(500).send("Error 500: Internal server error."); 
+        }
+        console.log(id); 
+        res.redirect('/categorias'); 
+    }); 
 }
 
 
 // Esta función es para mostrar el LISTADO de las categorías. 
 const index = (req, res) => {
-    try {
-        // Tratar de ejecutar este código. Si no se puede, 
-        // por ejemplo, porque no existe el archivo file_categorias.json 
-        arrCategorias = JSON.parse(
-        fs.readFileSync(path.resolve(__dirname, "../../file_categorias.json"), "utf-8")
-    ); //OK 
-    } catch (error) {
-        arrCategorias = []; 
-    }
-
-    // res.send('Listado de categorías.');
-    res.render('categorias/index', {categorias: arrCategorias});
+    model.findAll((error, rows)=>{
+        if (error){
+            return res.status(500).send("Error 500: Internal server error."); 
+        }
+        res.render('categorias/index', {categorias: rows});
+    })
 }
 
 
 // Esta es para mostrar el DETALLE de las categorías 
 const show = (req, res) => {
-    /**AQUÍ NO ES EL PROBLEMA */
-    arrCategorias = JSON.parse(
-        fs.readFileSync(path.resolve(__dirname, "../../file_categorias.json"), "utf-8")
-    );
-
     const {id} = req.params; 
-    const categ = arrCategorias.find(cat => cat.id == id);  
-    // console.log(categ); 
-    if (!categ){
-        return res.status(404).send("No existe la categoría!")
-    }; 
-    res.render('categorias/show', {categ});
+     
+    model.findById(id, (error, categ)=> {
+        console.error(error); 
+        if (error){
+            return res.status(500).send("Error 500: Internal server error. (SHOW)"); 
+        }        
+        console.log(categ);
+        if (!categ) {
+            return res.status(404).send("No existe la categoría");
+        }
+        res.render('categorias/show', {categ});
+    }); 
 }
 
 
 const edit = (req, res) => {
-    /** AQUÍ NO ES EL PROBLEMA */
-    arrCategorias = JSON.parse(
-        fs.readFileSync(path.resolve(__dirname, "../../file_categorias.json"), "utf-8")
-    );
+  const { id } = req.params;
 
-    const {id} = req.params; 
-    const categ = arrCategorias.find(cat => cat.id == id);
-    if (!categ){
-        return res.status(404).send("No existe la categoría!")
-    }; 
-    res.render('categorias/edit', {categ}); 
-}
+  model.findById(id, (error, categ) => {
+    if (error) {
+      return res.status(500).send("Internal Server Error");
+    }
+
+    if (!categ) {
+      return res.status(404).send("No existe la categoría");
+    }
+    res.render("categorias/edit", { categ });
+  });
+};
+
 
 // Se ejecuta al modificar las categorías  
 const update = (req, res) => {
-    arrCategorias = JSON.parse(
-        fs.readFileSync(path.resolve(__dirname, "../../file_categorias.json"), "utf-8")
-    );
+  const { id } = req.params;
+  const { inputNombreCategoria } = req.body;
+  const name = inputNombreCategoria; 
 
-    // res.send("UPDATE"); 
-    const { id } = req.params; 
-    const { inputNombreCategoria } = req.body; 
-    const categ = arrCategorias.find(cat => cat.id == id);
-    if (!categ){
-        return res.status(404).send("No existe la categoría!")
-    }; 
-
-    categ.nombre = inputNombreCategoria; 
-
-    // No se le puede pasar directamente el array arrCategorias porque no lo va a entender. 
-    // Por lo tanto se guarda el arrCategorias en formato JSON. 
-    // Los archivos JSON son más estrictos: las claves aparecen con comillas dobles y el texto también
-    fs.writeFileSync(
-        path.resolve(__dirname, "../../file_categorias.json"), 
-        JSON.stringify(arrCategorias)
-    )
-
-    res.redirect("/categorias"); 
-
-}
+  model.update(id, name, (error, changes) => {
+    if (error) {
+      return res.status(500).send("Internal Server Error");
+    }
+    // console.log(changes);
+    res.redirect("/categorias");
+  });
+};
 
 
+// JSON.parse() se utiliza para convertir una cadena de texto en formato JSON en un objeto JS.
 const destroy = (req, res) => {
-    // JSON.parse() se utiliza para convertir una cadena de texto en formato JSON en un objeto JS.
-    arrCategorias = JSON.parse(
-        fs.readFileSync(path.resolve(__dirname, "../../file_categorias.json"), "utf-8")
-    );
+  const { id } = req.params;
 
-    // res.send('DESTROY'); // 'borrar' en lugar de 'destroy'
-    const {id} = req.params; 
+  model.destroy(id, (error, changes) => {
+    if (error) {
+      return res.status(500).send("Internal Server Error");
+    }
+    // console.log(changes);
+    res.redirect("/categorias");
+  });
+};
 
-    const idx = arrCategorias.findIndex(categ => categ.id == id); 
-    if (idx == -1) {
-        return res.status(404).send("No existe la categoría."); 
-    } 
-
-    arrCategorias.splice(idx, 1); // A partir del índice idx borra 1 
-
-    fs.writeFileSync(
-        path.resolve(__dirname, "../../file_categorias.json"), 
-        JSON.stringify(arrCategorias)
-    )
-    res.redirect('/categorias'); 
-}
 
 module.exports = {
     create,

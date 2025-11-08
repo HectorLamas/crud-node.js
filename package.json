@@ -18,7 +18,8 @@
     "express-ejs-layouts": "^2.5.1",
     "git": "^0.1.5",
     "method-override": "^3.0.0",
-    "nodemailer": "^7.0.10"
+    "nodemailer": "^7.0.10",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"

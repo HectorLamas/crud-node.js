@@ -12,7 +12,7 @@
     <tbody>
         <% categorias.forEach(categ => { %> 
             <tr>
-                <td><a href="/categorias/<%= categ.id %>"><%= categ.nombre %></a></td>
+                <td><a href="/categorias/<%= categ.id %>"><%= categ.name %></a></td>
                 <td class="cell-inline">
                     <a class="button button--primary" href="/categorias/<%= categ.id %>/edit">Edit</a>
                     <!-- Se va a simular el método DELETE a través del método post -->

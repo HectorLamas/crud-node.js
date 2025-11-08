@@ -56,6 +56,11 @@ https://www.youtube.com/watch?v=c3wizBPT5jM&list=PLxXpfdBOyZ_WZpH04MHQ8qepsA4Gs8
 * Además se hace uso de los módulos 'fs' y 'path' para acceder al sistema de archivos: read-write. 
 * Finalmente se utilizan estilos para dar algo de estética a la aplicación. 
 
+Video 8. 
+Aprende a crear un CRUD completo con Node.js, Express y SQLite
+https://www.youtube.com/watch?v=c3wizBPT5jM&list=PLxXpfdBOyZ_WZpH04MHQ8qepsA4Gs8cEk&index=8
+* En este video se utiliza un motor de base de datos SQLite local para llevar a cabo las funciones CRUD
+
 
 ## Otras api de prueba 
 * fetch('https://fakestoreapi.com/products')
