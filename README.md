@@ -61,8 +61,13 @@ Aprende a crear un CRUD completo con Node.js, Express y SQLite
 https://www.youtube.com/watch?v=c3wizBPT5jM&list=PLxXpfdBOyZ_WZpH04MHQ8qepsA4Gs8cEk&index=8
 * En este video se utiliza un motor de base de datos SQLite local para llevar a cabo las funciones CRUD
 
+Video 9
+Cómo Crear un CRUD con Node.js, Express y MySQL | Guía Paso a Paso
+https://www.youtube.com/watch?v=c3wizBPT5jM&list=PLxXpfdBOyZ_WZpH04MHQ8qepsA4Gs8cEk&index=9
+* En este video se utiliza un motor de base de datos mySQL (MariaDB) para la implementación de un CRUD 
 
 ## Otras api de prueba 
 * fetch('https://fakestoreapi.com/products')
 * fetch('https://api.escuelajs.co/api/v1/products')
 * fetch('https://jsonplaceholder.typicode.com/todos/1')
+

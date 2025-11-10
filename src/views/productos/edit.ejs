@@ -1,0 +1,12 @@
+<h1>Editar Producto</h1> 
+
+<!-- Los métodos en el formulario son 'get' y 'post'. Entonces se tiene que 'simular' 
+el método PUT. 
+Para esto, se instala el módulo 'method-override'  -->
+<form action="/productos/<%= prod.id %>?_method=PUT" method="post">
+    <div>
+        <label for="inputNombreProducto">Nombre producto: </label>
+        <input type="text" name="inputNombreProducto" id="idInputNombreProducto" value="<%= prod.name%>">
+    </div>
+    <button class="button button--primary" type="submit">Guardar</button>
+</form>

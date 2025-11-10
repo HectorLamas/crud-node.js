@@ -27,6 +27,11 @@ td {
     margin-top: 0.5em;
 }
 
+.listados{
+    margin-top: 0.5em;
+}
+
+
 .cell-inline{
     display: flex;  
     gap: 0.25em;  
